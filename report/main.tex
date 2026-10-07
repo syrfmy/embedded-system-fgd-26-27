@@ -1,0 +1,98 @@
+% =====================================================================
+%  PROYEK LAPORAN MIKROKONTROLER
+%  Kompilasi: pdflatex main.tex (2x)  atau  latexmk -pdf main.tex
+% =====================================================================
+\documentclass[12pt,a4paper,oneside]{book}
+
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+% Bahasa Indonesia (jika paket babel-indonesian tidak ada, label diganti manual)
+\IfFileExists{indonesian.ldf}{\usepackage[indonesian]{babel}}{%
+  \usepackage[english]{babel}
+  \AtBeginDocument{%
+    \renewcommand{\chaptername}{Bab}
+    \renewcommand{\contentsname}{Daftar Isi}
+    \renewcommand{\listfigurename}{Daftar Gambar}
+    \renewcommand{\listtablename}{Daftar Tabel}
+    \renewcommand{\figurename}{Gambar}
+    \renewcommand{\tablename}{Tabel}
+    \renewcommand{\refname}{Daftar Pustaka}}}
+\IfFileExists{lmodern.sty}{\usepackage{lmodern}}{}
+\usepackage[top=3cm,bottom=2.5cm,left=3cm,right=2.5cm]{geometry}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage{booktabs,array,tabularx}
+\usepackage{amsmath}
+\usepackage{siunitx}
+\sisetup{output-decimal-marker={,}}
+\usepackage{float}
+\usepackage{caption}
+\usepackage{fancyhdr}
+\usepackage{listings}
+\usepackage{tikz}
+\usetikzlibrary{positioning}
+\usepackage{pgfplots}
+\pgfplotsset{compat=1.18}
+\usepackage[american]{circuitikz}
+\usepackage{setspace}
+\usepackage{tcolorbox}
+\usepackage[hidelinks]{hyperref}
+
+\setstretch{1.15}
+\setlength{\emergencystretch}{3em}
+
+% ---------- Gaya kode (Arduino/C++) ----------
+\definecolor{kode-bg}{gray}{0.96}
+\definecolor{kode-kom}{rgb}{0.0,0.5,0.2}
+\definecolor{kode-kunci}{rgb}{0.0,0.2,0.7}
+\lstdefinestyle{arduino}{
+  language=C++, backgroundcolor=\color{kode-bg},
+  basicstyle=\ttfamily\small, keywordstyle=\color{kode-kunci}\bfseries,
+  commentstyle=\color{kode-kom}\itshape, numbers=left,
+  numberstyle=\tiny\color{gray}, frame=single, rulecolor=\color{gray!50},
+  breaklines=true, tabsize=2, showstringspaces=false,
+  xleftmargin=1.5em, framexleftmargin=1.5em
+}
+\lstset{style=arduino}
+\renewcommand{\lstlistingname}{Kode}
+
+% ---------- Header & footer ----------
+\setlength{\headheight}{14.5pt}
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{\small Bab \thechapter\ --- \judulpendek}
+\fancyhead[R]{\small\namafg}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot[C]{\thepage}\renewcommand{\headrulewidth}{0pt}}
+
+% ---------- Penomoran: bagian A, B, C, ... di dalam bab ----------
+\renewcommand{\thesection}{\Alph{section}}
+\renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\numberwithin{equation}{chapter}
+
+% =====================================================================
+%  >>> ISI INFORMASI COVER DI SINI <<<\
+% =====================================================================
+\newif\ifdengancover \dengancovertrue  % ganti \dengancoverfalse bila cover tidak diperlukan
+\input{cover-info}
+
+\begin{document}
+
+\setcounter{chapter}{\numexpr\nomorbab-1\relax}
+
+\hypersetup{pageanchor=false}
+\ifdengancover \input{cover} \fi
+\hypersetup{pageanchor=true}
+
+\frontmatter
+\tableofcontents
+\clearpage
+\listoffigures
+\listoftables
+\mainmatter
+
+% Seluruh isi bab ada di bab.tex (dapat di-\input langsung ke buku induk)
+\input{bab}
+
+\end{document}

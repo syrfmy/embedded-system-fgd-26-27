@@ -1,0 +1,43 @@
+\section{Prinsip Kerja Setiap Komponen}
+\label{sec:prinsip-komponen}
+
+Bagian ini merupakan fokus utama FGD. Setiap komponen dibahas secara mandiri
+agar pembaca memahami cara kerja, karakteristik sinyal, kebutuhan antarmuka,
+dan batasan komponen sebelum melihat penerapannya dalam proyek.
+
+\subsection{Cara Menggunakan Template Komponen}
+Setiap komponen ditempatkan pada file terpisah di direktori
+\texttt{sections/components/}. Gunakan struktur yang sama untuk setiap
+komponen agar hasil eksplorasi dapat dibandingkan secara sistematis. Isi
+bagian yang tidak relevan dengan \textit{Tidak berlaku} dan tambahkan
+subsubsection khusus hanya jika memang diperlukan oleh karakteristik komponen.
+
+\input{sections/components/komponen_01}
+\input{sections/components/komponen_02}
+\input{sections/components/komponen_03}
+
+\subsection{Perbandingan Antar-Komponen}
+Setelah setiap komponen dibahas secara mandiri, bandingkan karakteristik yang
+paling penting untuk menunjukkan alasan pemilihan komponen dan hubungan
+masing-masing komponen dengan mikrokontroler.
+\begin{table}[H]
+\centering
+\caption{Perbandingan karakteristik komponen}
+\begin{tabularx}{\textwidth}{@{}lXXX@{}}
+\toprule
+Aspek & Komponen 1 & Komponen 2 & Komponen 3 \\
+\midrule
+Besaran utama & \dots & \dots & \dots \\
+Jenis sinyal & \dots & \dots & \dots \\
+Antarmuka MCU & \dots & \dots & \dots \\
+Kebutuhan daya & \dots & \dots & \dots \\
+Keterbatasan utama & \dots & \dots & \dots \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Komponen Pendukung}
+Jelaskan komponen pendukung yang diperlukan agar komponen utama bekerja
+sesuai spesifikasi, misalnya resistor pull-up/pull-down, kapasitor decoupling,
+dioda proteksi, transistor driver, regulator, atau level shifter. Hubungkan
+setiap komponen pendukung dengan kebutuhan komponen utama yang telah dibahas.

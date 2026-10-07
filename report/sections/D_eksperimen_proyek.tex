@@ -1,0 +1,128 @@
+\section{Proyek sebagai Eksperimen dan Bukti Pemahaman}
+\label{sec:proyek-eksperimen}
+
+Proyek bukan menjadi fokus utama pembahasan, melainkan sarana untuk menguji
+apakah prinsip kerja komponen yang telah dieksplorasi dapat diterapkan. Setiap
+bagian proyek harus dapat ditelusuri kembali ke konsep yang telah dijelaskan
+pada Bagian~\ref{sec:prinsip-komponen}.
+
+\subsection{Tujuan Eksperimen}
+Nyatakan pertanyaan yang ingin dibuktikan. Contohnya: apakah perubahan besaran
+fisis menghasilkan perubahan sinyal sesuai teori, apakah mikrokontroler dapat
+membaca sinyal dengan benar, atau apakah aktuator memberikan respons sesuai
+parameter kendali.
+
+\subsection{Desain Eksperimen}
+Jelaskan hubungan antara komponen, mikrokontroler, input, proses, dan output.
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[
+  blok/.style={draw,rectangle,rounded corners,minimum width=2.4cm,
+               minimum height=1cm,align=center,fill=blue!8},
+  >=stealth]
+  \node[blok] (in)  {Sensor /\\ Input};
+  \node[blok,right=1cm of in]  (mcu) {Mikro-\\kontroler};
+  \node[blok,right=1cm of mcu] (out) {Aktuator /\\ Output};
+  \draw[->] (in)--(mcu);
+  \draw[->] (mcu)--(out);
+\end{tikzpicture}
+\caption{Hubungan komponen dalam eksperimen}
+\label{fig:blok}
+\end{figure}
+
+\subsection{Rangkaian dan Koneksi}
+Tampilkan skema akhir, tabel koneksi pin, foto rangkaian, atau simulasi Wokwi.
+Jelaskan secara singkat bagaimana rangkaian menerapkan prinsip kerja yang telah
+dibahas pada setiap komponen.
+
+\subsection{Program Eksperimen}
+Tampilkan bagian kode yang diperlukan untuk membaca, mengolah, atau mengendalikan
+komponen. Untuk program panjang, simpan sumber lengkap di folder \texttt{src/}
+dan jelaskan bagian pentingnya di sini.
+\begin{lstlisting}[caption={Contoh program eksperimen sederhana},label={lst:dasar}]
+const int PIN_SENSOR = A0;
+const int PIN_OUTPUT = 9;
+
+void setup() {
+  Serial.begin(9600);
+  pinMode(PIN_OUTPUT, OUTPUT);
+}
+
+void loop() {
+  int nilai = analogRead(PIN_SENSOR);
+  analogWrite(PIN_OUTPUT, nilai / 4);
+  Serial.println(nilai);
+  delay(200);
+}
+\end{lstlisting}
+
+\subsection{Prosedur Pengujian}
+\begin{enumerate}
+  \item siapkan komponen dan rangkaian sesuai desain;
+  \item pastikan tegangan dan koneksi pin sesuai spesifikasi;
+  \item jalankan program eksperimen;
+  \item berikan variasi input atau kondisi pengujian;
+  \item catat keluaran sensor, respons aktuator, atau parameter lain yang diamati;
+  \item ulangi pengukuran untuk memastikan hasil konsisten;
+  \item simpan data mentah dan bukti demonstrasi.
+\end{enumerate}
+
+\subsection{Data dan Bukti Eksperimen}
+\begin{table}[H]
+\centering
+\caption{Data hasil eksperimen}
+\begin{tabular}{@{}cccc@{}}
+\toprule
+Kondisi/Input & Nilai Komponen & Output Terukur & Catatan \\
+\midrule
+1 & \dots & \dots & \dots \\
+2 & \dots & \dots & \dots \\
+3 & \dots & \dots & \dots \\
+4 & \dots & \dots & \dots \\
+5 & \dots & \dots & \dots \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Analisis Hasil}
+Bandingkan hasil eksperimen dengan prinsip kerja, persamaan, dan spesifikasi
+pada bagian sebelumnya. Jelaskan apakah perilaku yang diamati sesuai dengan
+teori. Jika terdapat perbedaan, jelaskan kemungkinan penyebabnya seperti
+noise, toleransi komponen, kesalahan pengukuran, keterbatasan sensor, atau
+kesalahan implementasi.
+
+\subsection{Validasi Pemahaman}
+Gunakan hasil eksperimen untuk menjawab beberapa pertanyaan:
+\begin{enumerate}
+  \item Mengapa komponen menghasilkan sinyal seperti yang diamati?
+  \item Bagaimana perubahan input memengaruhi output?
+  \item Fitur mikrokontroler apa yang digunakan dan mengapa?
+  \item Bagian rangkaian mana yang paling menentukan perilaku sistem?
+  \item Apakah hasil eksperimen mendukung prinsip kerja yang dijelaskan?
+\end{enumerate}
+
+\subsection{Bukti dan Repositori}
+Simpan bukti eksperimen berupa kode, konfigurasi simulasi, data mentah, foto,
+video, dan referensi. Struktur yang disarankan:
+\begin{table}[H]
+\centering
+\caption{Berkas bukti eksperimen}
+\begin{tabularx}{\textwidth}{@{}lX@{}}
+\toprule
+Folder / berkas & Isi \\
+\midrule
+\texttt{src/} & Kode program eksperimen \\
+\texttt{wokwi/} & Konfigurasi simulasi dan diagram rangkaian \\
+\texttt{data/} & Data mentah dan hasil pengolahan \\
+\texttt{video/} & Video demonstrasi \\
+\texttt{datasheet/} & Datasheet komponen dan mikrokontroler \\
+\texttt{images/} & Foto/skema/hasil pengamatan \\
+\texttt{docs-lib/} & Dokumentasi library yang digunakan \\
+\bottomrule
+\end{tabularx}
+\end{table}
+
+\subsection{Kesimpulan}
+Rangkum prinsip kerja yang berhasil dipahami, hasil eksperimen yang mendukung
+pemahaman tersebut, keterbatasan eksperimen, dan kemungkinan pengembangan
+selanjutnya.

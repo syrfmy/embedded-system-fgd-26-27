@@ -1,0 +1,79 @@
+\section{Konsep Mikrokontroler}
+\label{sec:konsep-mikrokontroler}
+
+Bagian ini memberikan landasan konseptual mengenai mikrokontroler sebelum
+pembahasan masuk ke prinsip kerja masing-masing komponen. Mikrokontroler
+berperan sebagai pusat pengendalian yang membaca masukan, memproses data,
+dan menghasilkan keluaran sesuai program. Pemahaman mengenai konsep ini
+diperlukan agar hubungan antara karakteristik komponen dan fitur mikrokontroler
+dapat dijelaskan secara teknis.
+
+\subsection{Pengertian dan Peran Mikrokontroler}
+Jelaskan pengertian mikrokontroler, fungsi utamanya, serta perbedaannya dengan
+mikroprosesor atau komputer umum. Hubungkan penjelasan dengan perannya dalam
+sistem yang digunakan pada FGD.
+
+\subsection{Arsitektur Dasar}
+Jelaskan bagian utama mikrokontroler, seperti CPU, memori program, RAM, GPIO,
+clock, timer, serta peripheral komunikasi. Jelaskan aliran data antara bagian
+tersebut secara konseptual.
+
+\subsection{GPIO dan Logika Digital}
+Jelaskan konsep input dan output digital, level logika HIGH/LOW, konfigurasi
+pin, pull-up/pull-down, serta hubungan GPIO dengan sensor dan aktuator digital.
+
+\subsection{ADC dan Pembacaan Sinyal Analog}
+Jelaskan prinsip Analog-to-Digital Converter (ADC), resolusi, rentang tegangan,
+referensi ADC, serta hubungan antara tegangan analog dan nilai digital yang
+dibaca mikrokontroler. Jika relevan, gunakan persamaan konversi dan contoh
+perhitungan.
+
+\subsection{PWM dan Pengendalian Output}
+Jelaskan prinsip Pulse Width Modulation (PWM), duty cycle, frekuensi, dan
+hubungannya dengan pengendalian aktuator atau keluaran lain. Jelaskan pula
+perbedaan antara PWM dan tegangan analog sebenarnya.
+
+\subsection{Timer dan Interrupt}
+Jelaskan fungsi timer/counter dan interrupt dalam sistem tertanam. Berikan
+contoh situasi ketika mekanisme tersebut diperlukan untuk membaca sensor atau
+mengendalikan aktuator secara tepat waktu.
+
+\subsection{Antarmuka Komunikasi}
+Jelaskan konsep komunikasi serial yang digunakan oleh komponen, misalnya UART,
+I2C, dan SPI. Untuk setiap antarmuka, jelaskan jalur sinyal, karakteristik
+komunikasi, serta alasan pemilihannya dalam suatu sistem.
+
+\subsection{Catu Daya dan Level Tegangan}
+Jelaskan kebutuhan tegangan dan arus mikrokontroler, level logika, regulator,
+serta pertimbangan kompatibilitas tegangan antara mikrokontroler dan komponen.
+
+\subsection{Alur Data pada Sistem}
+Jelaskan alur umum sistem berbasis mikrokontroler dari input, proses, hingga
+output. Hubungkan konsep tersebut dengan eksperimen yang akan dilakukan pada
+Bagian~\ref{sec:proyek-eksperimen}.
+
+\subsection{Spesifikasi Mikrokontroler yang Digunakan}
+Isi parameter mikrokontroler berdasarkan datasheet atau reference manual
+\cite{mcu}.
+\begin{table}[H]
+\centering
+\caption{Spesifikasi mikrokontroler yang digunakan}
+\begin{tabular}{@{}ll@{}}
+\toprule
+Parameter & Nilai \\
+\midrule
+Tipe / seri & \dots \\
+Frekuensi clock & \dots \,\si{\mega\hertz} \\
+Tegangan logika & \dots \,\si{\volt} \\
+Resolusi ADC & \dots bit \\
+Jumlah GPIO & \dots \\
+Peripheral & Timer, UART, I2C, SPI, \dots \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+\subsection{Hubungan Konsep Mikrokontroler dengan Eksplorasi Komponen}
+Jelaskan secara singkat bagaimana konsep GPIO, ADC, PWM, timer, interrupt,
+dan komunikasi serial akan digunakan untuk memahami komponen-komponen pada
+Bagian~\ref{sec:prinsip-komponen}. Bagian ini menjadi jembatan antara konsep
+mikrokontroler dan eksplorasi prinsip kerja setiap komponen.

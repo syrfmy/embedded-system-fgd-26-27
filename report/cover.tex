@@ -1,0 +1,45 @@
+% Halaman sampul -- tidak perlu diedit (gunakan cover-info.tex)
+\begin{titlepage}
+  \thispagestyle{empty}
+  \centering
+  \vspace*{0.5cm}
+
+  {\large\bfseries\jenisdokumen\par}
+  \vspace{0.4cm}
+  {\normalsize\matakuliah\par}
+  \vspace{1.2cm}
+
+  \IfFileExists{\logofile}{%
+    \includegraphics[width=\logowidth]{\logofile}%
+  }{%
+    \fbox{\parbox[c][\logowidth][c]{\logowidth}{\centering\small\color{gray}%
+      Letakkan logo di\\ \texttt{\detokenize{images/logo.png}}}}%
+  }
+  \vspace{1.2cm}
+
+  \rule{\textwidth}{1.2pt}\\[0.5cm]
+  {\LARGE\bfseries\judul\par}
+  \vspace{0.3cm}
+  {\large\itshape\subjudul\par}
+  \rule{\textwidth}{1.2pt}
+
+  \vspace{1.5cm}
+  {\normalsize Disusun oleh:\par}
+  \vspace{0.3cm}
+  {\normalsize\bfseries\kelompok\par}
+  \vspace{0.2cm}
+  {\normalsize\penulis\par}
+
+  \vspace{0.8cm}
+  {\normalsize Dosen Pengampu:\\ \textbf{\dosen}\par}
+
+  \ifx\infotambahan\empty\else
+    \vspace{0.8cm}
+    {\small\infotambahan\par}
+  \fi
+
+  \vfill
+  {\large\bfseries\fakultas\par}
+  {\large\bfseries\institusi\par}
+  {\normalsize\kota, \tahun\par}
+\end{titlepage}
