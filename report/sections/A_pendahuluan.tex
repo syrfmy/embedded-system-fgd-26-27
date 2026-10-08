@@ -17,25 +17,30 @@ Setelah mempelajari laporan ini, pembaca diharapkan mampu:
 \end{enumerate}
 
 \subsection{Ruang Lingkup}
-Pembahasan mencakup komponen yang dieksplorasi oleh Focus Group, mikrokontroler
-yang digunakan, rangkaian fisik, code program, serta eksperimen pembuktian.
+Pembahasan mencakup komponen yang dieksplorasi oleh Focus Group, mikrokontroler yang digunakan, rangkaian fisik, code program, serta eksperimen pembuktian.
 
 \subsection{Daftar Komponen yang Dieksplorasi}
+Seluruh eksperimen dan pengujian komponen dalam kegiatan ini dikendalikan menggunakan papan pengembang \textbf{Arduino Mega 2560} berbasis mikrokontroler \textbf{ATmega2560} sebagai unit pemroses utama. Untuk mempermudah integrasi, penyusunan jalur sinyal, serta distribusi catu daya antar-komponen tanpa melalui proses penyolderan, digunakan \textit{breadboard} dan kabel \textit{jumper} sebagai media \textit{prototyping}.
+
+Adapun daftar sensor dan aktuator yang menjadi objek utama dalam kegiatan eksplorasi ini disajikan pada Tabel~\ref{tab:komponen_eksplorasi}.
+
 \begin{table}[H]
 \centering
+\small
 \caption{Daftar komponen yang menjadi objek eksplorasi}
-\begin{tabularx}{\textwidth}{@{}clX@{}}
+\label{tab:komponen_eksplorasi}
+\begin{tabularx}{\textwidth}{@{}c l l X l@{}}
 \toprule
-No. & Komponen & Peran dalam eksplorasi \\
+\textbf{No.} & \textbf{Komponen} & \textbf{Jenis} & \textbf{Fungsi Utama / Parameter} & \textbf{Peran Eksplorasi} \\
 \midrule
-1 & DHT22 & Sensor/aktuator/komponen pendukung yang dieksplorasi \\
-2 & MQ-135 & Sensor/aktuator/komponen pendukung yang dieksplorasi \\
-3 & MQ-2 & Sensor/aktuator/komponen pendukung yang dieksplorasi \\
-4 & HC-SR501 & Sensor/aktuator/komponen pendukung yang dieksplorasi \\
-5 & FC-51 & Sensor/aktuator/komponen pendukung yang dieksplorasi \\
-6 & JQC-3FF-S-Z & Sensor/aktuator/komponen pendukung yang dieksplorasi \\
-7 & SG90 & Sensor/aktuator/komponen pendukung yang dieksplorasi \\
-8 & Micro DC Motor 6 \volt &sfsdf \\
+1 & DHT22 & Sensor & Mengukur suhu dan kelembapan udara & Sensor input \\
+2 & MQ-135 & Sensor & Mendeteksi kualitas udara (CO2, NH3, benzena) & Sensor input \\
+3 & MQ-2 & Sensor & Mendeteksi gas LPG, i-butana, propana, dan asap & Sensor input \\
+4 & HC-SR501 & Sensor & Mendeteksi pergerakan manusia (PIR) & Sensor input \\
+5 & FC-51 & Sensor & Mendeteksi halangan/objek jarak dekat (Inframerah) & Sensor input \\
+6 & JQC-3FF-S-Z & Modul Relay & Mengontrol beban listrik bertegangan tinggi & Aktuator / Kontrol \\
+7 & SG90 & Servo Motor & Mengatur sudut posisi (\ang{0}--\ang{180}) secara presisi & Aktuator mekanis \\
+8 & Micro DC Motor 6V & Motor DC & Menyediakan gerakan rotasi/putar & Aktuator mekanis \\
 \bottomrule
 \end{tabularx}
 \end{table}

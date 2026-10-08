@@ -1,17 +1,27 @@
-\section{Prinsip Kerja Setiap Komponen}
+\section{Komponen Sensor \& Aktuator}
 \label{sec:prinsip-komponen}
 
-Bagian ini merupakan fokus utama FGD. Setiap komponen dibahas secara mandiri
-agar pembaca memahami cara kerja, karakteristik sinyal, kebutuhan antarmuka,
-dan batasan komponen sebelum melihat penerapannya dalam proyek.
+\begin{wrapfigure}{l}{0.42\textwidth} % 'r' = sisi kanan, 0.38\textwidth = lebar area gambar
+	\vspace{-12pt} % Menggeser posisi gambar sedikit ke atas agar sejajar dengan baris pertama teks
+	\centering
+	\includegraphics[width=0.40\textwidth]{images/electronic_component.jpg} % Ganti dengan file gambar Anda
+	\caption{Kumpulan sensor \& aktuator}
+	\label{fig:pembuka_sna}
+	\vspace{-10pt} % Mengurangi jarak kosong di bawah caption
+\end{wrapfigure}
 
-\subsection{Cara Menggunakan Template Komponen}
-Setiap komponen ditempatkan pada file terpisah di direktori
-\texttt{sections/components/}. Gunakan struktur yang sama untuk setiap
-komponen agar hasil eksplorasi dapat dibandingkan secara sistematis. Isi
-bagian yang tidak relevan dengan \textit{Tidak berlaku} dan tambahkan
-subsubsection khusus hanya jika memang diperlukan oleh karakteristik komponen.
+Implementasi kendali berbasis mikrokontroler memerlukan interaksi fisik dengan lingkungan eksternal melalui kombinasi sensor dan aktuator. Bagian ini mengulas secara terpisah prinsip kerja, karakteristik sinyal, serta antarmuka elektrik setiap komponen yang digunakan. Pemahaman mendalam terhadap spesifikasi operasional ini menjadi landasan penting dalam merancang tata letak perangkat keras, menentukan teknik pengkondisian sinyal, serta menghindari potensi hambatan teknis sebelum komponen diintegrasikan ke dalam sistem keseluruhan.
 
+\par
+
+% \subsection{Cara Menggunakan Template Komponen}
+% Setiap komponen ditempatkan pada file terpisah di direktori
+% \texttt{sections/components/}. Gunakan struktur yang sama untuk setiap
+% komponen agar hasil eksplorasi dapat dibandingkan secara sistematis. Isi
+% bagian yang tidak relevan dengan \textit{Tidak berlaku} dan tambahkan
+% subsubsection khusus hanya jika memang diperlukan oleh karakteristik komponen.
+
+\input{sections/components/dht22.tex}
 \input{sections/components/komponen_01}
 \input{sections/components/komponen_02}
 \input{sections/components/komponen_03}

@@ -10,7 +10,6 @@
 \IfFileExists{indonesian.ldf}{\usepackage[indonesian]{babel}}{%
   \usepackage[english]{babel}
   \AtBeginDocument{%
-    \renewcommand{\chaptername}{Bab}
     \renewcommand{\contentsname}{Daftar Isi}
     \renewcommand{\listfigurename}{Daftar Gambar}
     \renewcommand{\listtablename}{Daftar Tabel}
@@ -37,9 +36,15 @@
 \usepackage{setspace}
 \usepackage{tcolorbox}
 \usepackage[hidelinks]{hyperref}
-
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows.meta, positioning, shadows, calc}
 \setstretch{1.15}
 \setlength{\emergencystretch}{3em}
+\usepackage{wrapfig}
+\usepackage{graphicx}
+\usepackage{microtype}
+\usepackage{tabularx}
+\usepackage{booktabs}
 
 % ---------- Gaya kode (Arduino/C++) ----------
 \definecolor{kode-bg}{gray}{0.96}
@@ -60,7 +65,7 @@
 \setlength{\headheight}{14.5pt}
 \pagestyle{fancy}
 \fancyhf{}
-\fancyhead[L]{\small Bab \thechapter\ --- \judulpendek}
+\fancyhead[L]{\small\judulpendek}
 \fancyhead[R]{\small\namafg}
 \fancyfoot[C]{\thepage}
 \renewcommand{\headrulewidth}{0.4pt}
@@ -69,7 +74,7 @@
 % ---------- Penomoran: bagian A, B, C, ... di dalam bab ----------
 \renewcommand{\thesection}{\Alph{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
-\numberwithin{equation}{chapter}
+
 
 % =====================================================================
 %  >>> ISI INFORMASI COVER DI SINI <<<\
@@ -78,8 +83,6 @@
 \input{cover-info}
 
 \begin{document}
-
-\setcounter{chapter}{\numexpr\nomorbab-1\relax}
 
 \hypersetup{pageanchor=false}
 \ifdengancover \input{cover} \fi
