@@ -3,7 +3,19 @@
 
 % ---------------------------------------------------------------------
 \subsubsection{Identitas dan Fungsi}
-DHT22 (AM2302) adalah modul sensor digital yang berfungsi untuk mengukur suhu dan kelembapan relatif (\textit{relative humidity}) secara simultan. Modul ini dipilih karena menawarkan rentang pengukuran yang luas, akurasi tinggi dengan kompensasi suhu penuh, serta antarmuka digital kustom \textit{1-wire bus} yang efisien dalam penggunaan pin I/O mikrokontroler.
+
+\begin{wrapfigure}{r}{0.25\textwidth}% 'r' untuk posisi kanan, '0.25\textwidth' untuk lebar gambar
+	\vspace{-40pt}
+	\centering
+	\includegraphics[width=\linewidth]{images/dht22_sensor.jpg} % Ganti dengan nama file gambar Anda
+	\caption{Sensor DHT22.}
+	\label{fig:dht22}
+\end{wrapfigure}
+
+
+DHT22 (AM2302) adalah modul sensor digital yang berfungsi untuk mengukur suhu dan kelembapan relatif (\textit{relative humidity}) secara simultan. Modul ini menawarkan rentang pengukuran yang luas, akurasi tinggi dengan kompensasi suhu penuh, serta antarmuka digital kustom \textit{1-wire bus} yang efisien dalam penggunaan pin I/O mikrokontroler.
+
+\par
 
 \begin{table}[H]
 	\centering
@@ -18,7 +30,7 @@ DHT22 (AM2302) adalah modul sensor digital yang berfungsi untuk mengukur suhu da
 		Model/part number  & AM2302 Digital Relative Humidity and Temperature Sensor                       \\
 		Jenis              & Sensor Digital (Kombinasi Suhu dan Kelembapan)                                \\
 		Fungsi utama       & Mengukur temperatur udara dan kelembapan relatif (\textit{Relative Humidity}) \\
-		Sumber dokumentasi & AM2302 Datasheet (Adafruit)                                                   \\
+		Sumber dokumentasi & AM2302 Datasheet (SparkFun Electronics)                                                   \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
@@ -88,7 +100,7 @@ Alur pemrosesan data internal sensor DHT22 mengikuti pola \textbf{Input $\righta
 	\item \textbf{Output:} Sinyal serial digital 40-bit ditransmisikan melalui jalur komunikasi \textit{single-bus} (sering disebut \textit{custom 1-wire}) saat mikrokontroler utama menginisiasi sinyal \textit{start}.
 \end{enumerate}
 
-\paragraph{Detail Sinyal Protokol Komunikasi Single-Bus}
+\paragraph{Detail Sinyal Komunikasi}
 Komunikasi antara mikrokontroler utama (\textit{host}) dan sensor DHT22 dilakukan melalui satu jalur data tunggal (\textit{data line}) dengan urutan sinyal sebagai berikut:
 \begin{itemize}
 	\item \textbf{Sinyal Start (\textit{Host}):} \textit{Host} menarik jalur data ke kondisi LOW selama minimal 1--10 ms, kemudian menariknya ke HIGH selama 20--40 $\mu$s untuk meminta pembacaan data.
@@ -137,7 +149,7 @@ Komunikasi antara mikrokontroler utama (\textit{host}) dan sensor DHT22 dilakuka
 		\node[color={rgb,255:red,15;green,118;blue,110}, font=\bfseries\scriptsize] at (240, -0.4) {Respons Sensor};
 
 		% Bit Data
-		\draw[stealth-stealth, color={rgb,255:red,217;green,119;blue,6}] (370, 1.3) -- (398, 1.3) node[midway, above=1pt, font=\tiny] {$26\text{--}28\,\mu\text{s}$};
+		\draw[stealth-stealth, color={rgb,255:red,217;green,119;blue,6}] (370, 1.3) -- (398, 1.3) node[midway, above=1pt, font=\tiny] {$26\text{ s.d. }28\,\mu\text{s}$};
 		\node[font=\bfseries\small, color={rgb,255:red,217;green,119;blue,6}] at (384, 2.2) {Bit 0};
 
 		\draw[stealth-stealth, color={rgb,255:red,217;green,119;blue,6}] (448, 1.3) -- (518, 1.3) node[midway, above=1pt, font=\tiny] {$70\,\mu\text{s}$};
@@ -192,12 +204,12 @@ Seperti yang dijelaskan sebelumnya, komunikasi data dilakukan melalui protokol \
 		Aspek                      & Nilai                                                                                  & Keterangan                                  \\
 		\midrule
 		Jenis sinyal               & Digital Serial (\textit{Custom 1-Wire Bus})                                            & Paket data 40 bit                           \\
-		Level logika               & TTL $0\text{--}5\,\text{V}$                                                            & Sesuai dengan level $V_{CC}$                \\
-		Rentang tegangan           & $3{,}3\text{--}5{,}5\,\text{V DC}$                                                     & Tegangan operasional standar                \\
+		Level logika               & TTL $0\text{ s.d. }5\,\text{V}$                                                            & Sesuai dengan level $V_{CC}$                \\
+		Rentang tegangan           & $3{,}3\text{ s.d. }5{,}5\,\text{V DC}$                                                     & Tegangan operasional standar                \\
 		Frekuensi Sampling         & $0{,}5\,\text{Hz}$                                                                     & Interval pembacaan minimal 2 detik          \\
-		Sinyal \textit{Start} Host & \textit{LOW} $\ge 1\text{--}10\,\text{ms}$, \textit{HIGH} $20\text{--}40\,\mu\text{s}$ & Inisiasi komunikasi oleh MCU                \\
+		Sinyal \textit{Start} Host & \textit{LOW} $\ge 1\text{ s.d. }10\,\text{ms}$, \textit{HIGH} $20\text{ s.d. }40\,\mu\text{s}$ & Inisiasi komunikasi oleh MCU                \\
 		Respons Sensor             & \textit{LOW} $80\,\mu\text{s}$, \textit{HIGH} $80\,\mu\text{s}$                        & Konfirmasi kesiapan transmisii sensor       \\
-		Format Bit Data            & Bit `0' ($26\text{--}28\,\mu\text{s}$), Bit `1' ($70\,\mu\text{s}$)                    & Ditentukan oleh durasi logika \textit{HIGH} \\
+		Format Bit Data            & Bit `0' ($26\text{ s.d. }28\,\mu\text{s}$), Bit `1' ($70\,\mu\text{s}$)                    & Ditentukan oleh durasi logika \textit{HIGH} \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
@@ -205,6 +217,14 @@ Seperti yang dijelaskan sebelumnya, komunikasi data dilakukan melalui protokol \
 % ---------------------------------------------------------------------
 \subsubsection{Pin, Catu Daya, dan Antarmuka}
 Di pasaran, sensor AM2302/DHT22 ditemui dalam dua varian kemasan fisik, yaitu versi komponen independen (\textit{standalone}) yang memiliki 4 pin dan versi modul (\textit{breakout board}) yang memiliki 3 pin. Perbedaan utama keduanya terletak pada ketersediaan pin NC (\textit{Not Connected}) serta integrasi resistor \textit{pull-up} internal pada versi modul.
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.5\textwidth]{images/dht22_pinout.jpg}
+	\caption{Pemetaan pin dan antarmuka komponen AM2302/DHT22.}
+	\label{fig:dht22_pinout}
+\end{figure}
+
 
 \begin{table}[H]
 	\centering
@@ -215,7 +235,7 @@ Di pasaran, sensor AM2302/DHT22 ditemui dalam dua varian kemasan fisik, yaitu ve
 		\toprule
 		Pin (4-Pin) & Pin (3-Pin Modul) & Kabel  & Fungsi   & Keterangan                                   \\
 		\midrule
-		Pin 1       & VCC / VDD         & Merah  & $V_{DD}$ & Catu daya $3{,}3\text{--}5{,}5\,\text{V DC}$ \\
+		Pin 1       & VCC / VDD         & Merah  & $V_{DD}$ & Catu daya $3{,}3\text{ s.d. }5{,}5\,\text{V DC}$ \\
 		Pin 2       & DATA / OUT        & Kuning & DATA     & Jalur komunikasi data serial bi-direksional  \\
 		Pin 3       & --                & --     & NC       & Tidak terhubung (\textit{Not Connected})     \\
 		Pin 4       & GND               & Hitam  & GND      & Referensi ground ($0\,\text{V}$)             \\
@@ -223,10 +243,10 @@ Di pasaran, sensor AM2302/DHT22 ditemui dalam dua varian kemasan fisik, yaitu ve
 	\end{tabularx}
 \end{table}
 
-Pada versi 4-pin standalone, Pin 3 merupakan pin dummy yang tidak terhubung ke sirkuit internal. Sementara pada versi modul 3-pin, Pin 3 (NC) telah dihilangkan dan sebuah resistor \textit{pull-up} $4{,}7\text{--}10\,\text{k}\Omega$ biasanya sudah terpasang secara bawaan di dalam modul antara pin VCC dan DATA.
+Pada versi 4-pin standalone, Pin 3 merupakan pin dummy yang tidak terhubung ke sirkuit internal. Sementara pada versi modul 3-pin, Pin 3 (NC) telah dihilangkan dan sebuah resistor \textit{pull-up} $4{,}7\text{ s.d. }10\,\text{k}\Omega$ biasanya sudah terpasang secara bawaan di dalam modul antara pin VCC dan DATA.
 
 \subsubsection{Kebutuhan Catu Daya}
-Tegangan kerja optimal berada pada range $3{,}3\text{--}5{,}5\,\text{V DC}$. Konsumsi arus berada pada rentang $1\text{--}1{,}5\,\text{mA}$ saat proses pengukuran dan $40\text{--}50\,\mu\text{A}$ pada kondisi siaga (\textit{standby}). Garis sinyal DATA memerlukan resistor \textit{pull-up} eksternal (rekomendasi datasheet $1\,\text{k}\Omega$) terhubung ke $V_{DD}$ untuk menjamin stabilitas bus. Disarankan menambahkan kapasitor \textit{decoupling} $100\,\text{nF}$ antara $V_{DD}$ dan GND untuk memfilter \textit{noise} daya.
+Tegangan kerja optimal berada pada range $3{,}3\text{ s.d. }5{,}5\,\text{V DC}$. Konsumsi arus berada pada rentang $1\text{ s.d. }1{,}5\,\text{mA}$ saat proses pengukuran dan $40\text{ s.d. }50\,\mu\text{A}$ pada kondisi siaga (\textit{standby}). Garis sinyal DATA memerlukan resistor \textit{pull-up} eksternal (rekomendasi datasheet $1\,\text{k}\Omega$) terhubung ke $V_{DD}$ untuk menjamin stabilitas bus. Disarankan menambahkan kapasitor \textit{decoupling} $100\,\text{nF}$ antara $V_{DD}$ dan GND untuk memfilter \textit{noise} daya.
 
 % ---------------------------------------------------------------------
 \subsubsection{Spesifikasi Penting dari Datasheet}
@@ -236,15 +256,15 @@ Tegangan kerja optimal berada pada range $3{,}3\text{--}5{,}5\,\text{V DC}$. Kon
 	\caption{Spesifikasi penting komponen AM2302/DHT22}
 	\label{tab:dht22_spesifikasi}
 	\small
-	\begin{tabularx}{\textwidth}{@{}Xcc@{}} % Perbaikan: Ditambahkan \textwidth dan mengubah kolom pertama menjadi X
+	\begin{tabularx}{\textwidth}{@{}Xc@{}} % Perbaikan: Ditambahkan \textwidth dan mengubah kolom pertama menjadi X
 		\toprule
-		Parameter                                             & Nilai                   & Satuan        \\
+		Parameter                                             & Nilai                          \\
 		\midrule
-		Tegangan kerja ($V_{DD}$)                             & $3{,}3 \text{--} 5{,}5$ & $\text{V DC}$ \\
-		Arus konsumsi (Pengukuran)                            & $1{,}0 \text{--} 1{,}5$ & $\text{mA}$   \\
-		Arus konsumsi (\textit{Standby})                      & $40 \text{--} 50$       & $\mu\text{A}$ \\
-		Periode Pengambilan Data (\textit{Collecting period}) & $2$                     & $\text{s}$    \\
-		Jarak Transmisi Maksimum                              & Hingga $100$            & $\text{m}$    \\
+		Tegangan kerja ($V_{DD}$)                             & $3{,}3 \text{ s.d. } 5{,}5$ $\text{V DC}$ \\
+		Arus konsumsi (Pengukuran)                            & $1{,}0 \text{ s.d. } 1{,}5$ $\text{mA}$   \\
+		Arus konsumsi (\textit{Standby})                      & $40 \text{ s.d. } 50$ $\mu\text{A}$ \\
+		Periode Pengambilan Data (\textit{Collecting period}) & $2$ $\text{s}$    \\
+		Jarak Transmisi Maksimum                              & Hingga $100$ $\text{m}$    \\
 		\bottomrule
 	\end{tabularx}
 \end{table}
@@ -258,17 +278,17 @@ Untuk mengintegrasikan sensor DHT22/AM2302 dengan mikrokontroler (seperti Arduin
 \paragraph{Rangkaian Skematik dan Simulasi}
 Pengujian dan validasi antarmuka hardware dapat dilakukan melalui simulator sirkuit daring seperti Wokwi maupun perakitan fisik langsung.
 \begin{itemize}
-    \item \textbf{Catu Daya:} Pin VCC dihubungkan ke $5\,\text{V}$ (atau $3{,}3\,\text{V}$) dan GND dihubungkan ke \textit{ground} mikrokontroler.
-    \item \textbf{Resistor Pull-Up:} Apabila menggunakan versi \textit{standalone} (4-pin), sebuah resistor \textit{pull-up} eksternal bernilai $4{,}7\text{--}10\,\text{k}\Omega$ wajib dipasang di antara pin VCC dan pin DATA untuk mencegah kondisi \textit{floating} saat bus dalam keadaan \textit{idle}. Jika menggunakan versi modul \textit{breakout} (3-pin), resistor ini biasanya sudah terpasang secara bawaan.
+	\item \textbf{Catu Daya:} Pin VCC dihubungkan ke $5\,\text{V}$ (atau $3{,}3\,\text{V}$) dan GND dihubungkan ke \textit{ground} mikrokontroler.
+	\item \textbf{Resistor Pull-Up:} Apabila menggunakan versi \textit{standalone} (4-pin), sebuah resistor \textit{pull-up} eksternal bernilai $4{,}7\text{ s.d. }10\,\text{k}\Omega$ wajib dipasang di antara pin VCC dan pin DATA untuk mencegah kondisi \textit{floating} saat bus dalam keadaan \textit{idle}. Jika menggunakan versi modul \textit{breakout} (3-pin), resistor ini biasanya sudah terpasang secara bawaan.
 \end{itemize}
 
 % Tempat Menambahkan Gambar Rangkaian
 \begin{figure}[htbp]
-    \centering
-    % Ganti 'nama_file_gambar' dengan nama file gambar Anda (misal: skema_dht22_wokwi.png)
-    \includegraphics[width=0.7\textwidth]{images/wokwi_dht22_demo.png}
-    \caption{Rangkaian sensor DHT22/AM2302 dengan mikrokontroler ATmega2560 pada simulasi Wokwi.}
-    \label{fig:dht22_schematic}
+	\centering
+	% Ganti 'nama_file_gambar' dengan nama file gambar Anda (misal: skema_dht22_wokwi.png)
+	\includegraphics[width=0.6\textwidth]{images/wokwi_dht22_demo.png}
+	\caption{Rangkaian sensor DHT22/AM2302 dengan mikrokontroler ATmega2560 pada simulasi Wokwi.}
+	\label{fig:dht22_schematic}
 \end{figure}
 
 Visualisasi koneksi antarmuka secara lengkap ditunjukkan pada Gambar~\ref{fig:dht22_schematic}, sedangkan rincian pemetaan fungsi pin dan fitur mikrokontroler dirangkum pada Tabel~\ref{tab:dht22_mcu_mapping}.
@@ -283,7 +303,7 @@ Visualisasi koneksi antarmuka secara lengkap ditunjukkan pada Gambar~\ref{fig:dh
 		Kebutuhan Komponen               & Fitur MCU                      & Alasan Pemilihan \& Fungsi                                                                    \\
 		\midrule
 		Jalur Komunikasi \textit{1-Wire} & Pin Digital GPIO (misal Pin 2) & Mampu beralih mode dari \textit{Output} (\textit{Start}) ke \textit{Input} (\textit{Data})    \\
-		Pengukuran Pulsa Data            & Hardware Timer / Loop Delay    & Membedakan Bit `0' ($26\text{--}28\,\mu\text{s}$) dan Bit `1' ($70\,\mu\text{s}$) via pustaka \\
+		Pengukuran Pulsa Data            & Hardware Timer / Loop Delay    & Membedakan Bit `0' ($26\text{ s.d. }28\,\mu\text{s}$) dan Bit `1' ($70\,\mu\text{s}$) via pustaka \\
 		Pencegahan \textit{Floating} Bus & External / Internal Pull-Up    & Menjaga bus tetap pada level \textit{HIGH} saat kondisi \textit{idle}                         \\
 		\bottomrule
 	\end{tabularx}
@@ -295,8 +315,8 @@ Berikut adalah contoh implementasi program sederhana menggunakan pustaka \textbf
 \begin{lstlisting}[language=C++, caption={Kode program pembacaan sensor DHT22 pada Arduino/ATmega2560}, label={lst:dht22_code}]
 #include <DHT.h>
 
-#define DHTPIN 3       // Pin Digital MCU yang terhubung ke pin DATA DHT22
-#define DHTTYPE DHT22  // Menentukan tipe sensor (DHT22/AM2302)
+#define DHTPIN 3
+#define DHTTYPE DHT22
 
 DHT dht(DHTPIN, DHTTYPE);
 
@@ -307,19 +327,17 @@ void setup() {
 }
 
 void loop() {
-  // Jeda minimal 2 detik antar pembacaan (spesifikasi sampling rate DHT22)
+
   delay(2000);
 
   float kelembapan = dht.readHumidity();
-  float suhu = dht.readTemperature(); // Membaca suhu dalam satuan Celsius
+  float suhu = dht.readTemperature();
 
-  // Memeriksa jika pembacaan gagal (kembalian NaN)
   if (isnan(kelembapan) || isnan(suhu)) {
     Serial.println(F("Gagal membaca data dari sensor DHT22!"));
     return;
   }
 
-  // Menampilkan hasil pembacaan ke Serial Monitor
   Serial.print(F("Kelembapan: "));
   Serial.print(kelembapan);
   Serial.print(F("%  |  Suhu: "));

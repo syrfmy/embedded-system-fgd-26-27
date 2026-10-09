@@ -26,6 +26,7 @@
 \sisetup{output-decimal-marker={,}}
 \usepackage{float}
 \usepackage{caption}
+\usepackage{subcaption}
 \usepackage{fancyhdr}
 \usepackage{listings}
 \usepackage{tikz}
@@ -44,7 +45,16 @@
 \usepackage{graphicx}
 \usepackage{microtype}
 \usepackage{tabularx}
+\usepackage{multirow}
 \usepackage{booktabs}
+\usepackage{xurl} % Memungkinkan pemutusan garis URL di titik mana saja
+\usepackage{hyperref}
+\hypersetup{
+    colorlinks=true,
+    linkcolor=blue,
+    filecolor=magenta,
+    urlcolor=blue,
+}
 
 % ---------- Gaya kode (Arduino/C++) ----------
 \definecolor{kode-bg}{gray}{0.96}
@@ -74,8 +84,12 @@
 % ---------- Penomoran: bagian A, B, C, ... di dalam bab ----------
 \renewcommand{\thesection}{\Alph{section}}
 \renewcommand{\thesubsection}{\thesection.\arabic{subsection}}
+\addto\captionsindonesian{%
+  \renewcommand{\bibname}{Daftar Pustaka}%
+}
 
 
+\captionsetup[figure]{font=footnotesize, labelfont=bf}
 % =====================================================================
 %  >>> ISI INFORMASI COVER DI SINI <<<\
 % =====================================================================

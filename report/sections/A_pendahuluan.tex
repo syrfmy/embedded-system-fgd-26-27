@@ -29,18 +29,18 @@ Adapun daftar sensor dan aktuator yang menjadi objek utama dalam kegiatan eksplo
 \small
 \caption{Daftar komponen yang menjadi objek eksplorasi}
 \label{tab:komponen_eksplorasi}
-\begin{tabularx}{\textwidth}{@{}c l l X l@{}}
+\begin{tabularx}{\textwidth}{@{}c p{2.8cm} p{2.8cm} X p{2.8cm}@{}}
 \toprule
-\textbf{No.} & \textbf{Komponen} & \textbf{Jenis} & \textbf{Fungsi Utama / Parameter} & \textbf{Peran Eksplorasi} \\
+\textbf{No.} & \textbf{Komponen} & \textbf{Jenis} & \textbf{Fungsi Utama / Parameter} & \textbf{Peran} \\
 \midrule
 1 & DHT22 & Sensor & Mengukur suhu dan kelembapan udara & Sensor input \\
-2 & MQ-135 & Sensor & Mendeteksi kualitas udara (CO2, NH3, benzena) & Sensor input \\
-3 & MQ-2 & Sensor & Mendeteksi gas LPG, i-butana, propana, dan asap & Sensor input \\
-4 & HC-SR501 & Sensor & Mendeteksi pergerakan manusia (PIR) & Sensor input \\
-5 & FC-51 & Sensor & Mendeteksi halangan/objek jarak dekat (Inframerah) & Sensor input \\
-6 & JQC-3FF-S-Z & Modul Relay & Mengontrol beban listrik bertegangan tinggi & Aktuator / Kontrol \\
-7 & SG90 & Servo Motor & Mengatur sudut posisi (\ang{0}--\ang{180}) secara presisi & Aktuator mekanis \\
-8 & Micro DC Motor 6V & Motor DC & Menyediakan gerakan rotasi/putar & Aktuator mekanis \\
+2 & MQ-2 / MQ-135 & Sensor Gas \& Kualitas Udara & Mendeteksi kebocoran gas mudah terbakar (LPG, metana) serta polutan udara ($\text{CO}_2$, $\text{NH}_3$, benzena) & Sensor Input \\
+% 3 & MQ-2 & Sensor & Mendeteksi gas LPG, i-butana, propana, dan asap & Sensor input \\
+3 & HC-SR501 & Sensor & Mendeteksi pergerakan manusia (PIR) & Sensor input \\
+% 5 & FC-51 & Sensor & Mendeteksi halangan/objek jarak dekat (Inframerah) & Sensor input \\
+4 & JQC-3FF-S-Z & Modul Relay & Mengontrol beban listrik bertegangan tinggi & Aktuator / Kontrol \\
+5 & SG90 & Servo Motor & Mengatur sudut posisi (\ang{0}--\ang{180}) secara presisi & Aktuator mekanis \\
+6 & Micro DC Motor 6V dengan bilah Kipas & Motor DC & Menyediakan gerakan rotasi untuk menggerakkan bilah kipas guna menghasilkan aliran angin & Aktuator mekanis \\
 \bottomrule
 \end{tabularx}
 \end{table}

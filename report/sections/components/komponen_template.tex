@@ -1,232 +1,319 @@
 % =====================================================================
 % TEMPLATE ELABORASI SATU KOMPONEN
 % Salin file ini menjadi komponen_NAMA.tex, lalu ganti placeholder.
+% Struktur ini diselaraskan secara generik mengikuti alur dht22.tex.
 % Jangan meng-input file template ini secara langsung ke bab.
 % =====================================================================
 
-\subsection{Nama Komponen}
-\label{subsec:komponen-nama}
+\subsection{Nama Komponen -- Peran/Kategori Singkat}
+\label{subsec:nama_komponen}
 
 % ---------------------------------------------------------------------
 \subsubsection{Identitas dan Fungsi}
-Jelaskan nama komponen, produsen/model, kategori komponen (sensor, aktuator,
-modul, atau komponen pendukung), fungsi utama, serta alasan komponen dipilih
-untuk dieksplorasi.
+Jelaskan modul/komponen secara ringkas, fungsinya dalam sistem tertanam,
+kategori komponen (sensor analog/digital, aktuator, modul komunikasi, atau IC driver),
+serta alasan komponen dipilih (misal: akurasi tinggi, antarmuka sederhana, konsumsi daya rendah,
+ketersediaan pustaka, atau rentang kerja yang lebar).
 
 \begin{table}[H]
-\centering
-\caption{Identitas komponen}
-\begin{tabularx}{\textwidth}{@{}lX@{}}
-\toprule
-Parameter & Keterangan \\
-\midrule
-Nama komponen & \dots \\
-Model/part number & \dots \\
-Jenis & Sensor/Aktuator/Modul/Komponen pendukung \\
-Fungsi utama & \dots \\
-Sumber dokumentasi & \dots \\
-\bottomrule
-\end{tabularx}
+	\centering
+	\caption{Identitas komponen Nama Komponen}
+	\label{tab:nama_komponen_identitas}
+	\small
+	\begin{tabularx}{\textwidth}{@{}lX@{}}
+		\toprule
+		Parameter          & Keterangan                                                       \\
+		\midrule
+		Nama komponen      & Nama dagang / nama populer komponen                              \\
+		Model/part number  & Part number resmi pabrikan (misal: AM2302, HC-SR04, SG90, DS18B20) \\
+		Jenis              & Sensor (Analog/Digital) / Aktuator / Modul Antarmuka             \\
+		Fungsi utama       & Deskripsi singkat fungsi utama komponen                          \\
+		Sumber dokumentasi & Judul/tautan datasheet atau referensi pabrikan resmi             \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 % ---------------------------------------------------------------------
 \subsubsection{Prinsip Kerja}
-Jelaskan fenomena fisika atau elektronika yang membuat komponen memberikan
-respons tertentu. Susun penjelasan dari kondisi masukan, proses internal,
-hingga keluaran. Jika relevan, sertakan diagram, kurva karakteristik, atau
-persamaan matematis.
+Jelaskan fenomena fisika atau prinsip transduser elektronika yang memungkinkan komponen
+beroperasi. Misalnya: efek termoelektrik/piezoelektrik, perubahan resistansi atau kapasitansi,
+efek medan magnet Hall, fotodioda optik, atau induksi elektromagnetik pada motor/aktuator.
+Uraikan elemen-elemen penyusun internalnya:
 
-% Contoh format persamaan:
-% \begin{equation}
-%   y = f(x)
-%   \label{eq:komponen-nama}
-% \end{equation}
+\begin{enumerate}
+	\item \textbf{Elemen Transduser Utama:}
+	      Jelaskan transduser primer yang berinteraksi langsung dengan besaran fisik luar.
+	      Uraikan bagaimana perubahan besaran lingkungan memengaruhi karakteristik fisis/listrik elemen ini.
 
-\subsubsection{Alur Kerja Internal}
-Uraikan alur \textbf{input \textrightarrow proses \textrightarrow output}.
-Untuk sensor, jelaskan perubahan besaran fisik menjadi sinyal listrik.
-Untuk aktuator, jelaskan perubahan sinyal listrik menjadi aksi fisik.
-Jika komponen berupa modul digital, jelaskan proses pengolahan dan komunikasi
-data secara konseptual.
+	      \begin{figure}[H]
+		      \centering
+		      % Ganti dengan path file kurva/karakteristik transduser (misal kurva respons, diagram blok internal)
+		      % \includegraphics[width=0.50\textwidth]{images/karakteristik_nama_komponen.png}
+		      \fbox{\parbox[c][3.5cm][c]{0.50\textwidth}{\centering Tempatkan kurva karakteristik atau diagram blok elemen di sini}}
+		      \caption{Kurva karakteristik atau struktur internal elemen komponen Nama Komponen.}
+		      \label{fig:nama_komponen_karakteristik}
+	      \end{figure}
+
+	\item \textbf{Elemen Pengkondisi Sinyal / Sirkuit Internal:}
+	      Jelaskan pengkondisian sinyal internal seperti penguat (op-amp), filter, osilator,
+	      ADC internal, atau mikrokontroler internal yang memproses besaran dari transduser primer.
+\end{enumerate}
+
+\paragraph{Konsep dan Formulasi Matematis Terkait}
+Jika terdapat hukum fisika, hubungan transfer function, atau konversi matematis besaran,
+tuliskan persamaannya secara eksplisit:
+
+\begin{equation}
+	y = f(x)
+	\label{eq:nama_komponen_formulasi}
+\end{equation}
+
+\noindent di mana:
+\begin{itemize}
+	\item $y$ = Variabel keluaran (misal tegangan keluaran, besaran digital terhitung, dsb.).
+	\item $x$ = Variabel masukan fisik (misal suhu, jarak, sudut, intensitas cahaya, dsb.).
+\end{itemize}
+
+% ---------------------------------------------------------------------
+\subsubsection{Alur Kerja Internal dan Protokol Komunikasi}
+Alur pemrosesan data dan interaksi komponen mengikuti pola \textbf{Input $\rightarrow$ Proses $\rightarrow$ Output}:
+\begin{enumerate}
+	\item \textbf{Input:} Stimulus besaran fisik dari lingkungan (untuk sensor) atau pulsa perintah/sinyal kontrol dari mikrokontroler (untuk aktuator).
+	\item \textbf{Proses:} Pemrosesan internal oleh sirkuit terpadu komponen (penguatan sinyal, konversi ADC, kompensasi kalibrasi OTP/EEPROM, atau modulasi PWM driver daya).
+	\item \textbf{Output:} Sinyal listrik terformat (tegangan analog, pulsa logika digital, paket serial I$^2$C/SPI/UART/1-Wire) atau aksi mekanik/fisik langsung.
+\end{enumerate}
+
+\paragraph{Detail Sinyal Protokol Komunikasi}
+Jelaskan urutan timing, sinyal jabat tangan (\textit{handshake}), atau format transmisi data:
+\begin{itemize}
+	\item \textbf{Sinyal Start / Inisiasi:} Kondisi bus atau pulsa pemicu yang memulai transmisi data.
+	\item \textbf{Sinyal Respons / Acknowledgment:} Respons dari komponen yang mengonfirmasi kesiapan komunikasi.
+	\item \textbf{Format Transmisi Data:} Struktur data per bit/byte, durasi pulsa logika LOW/HIGH, atau timing clock.
+	\item \textbf{Struktur Frame / Pemeriksaan Galat:} Pembagian paket data (misal Data MSB/LSB + Checksum/CRC jika ada).
+\end{itemize}
+
+% Diagram Pewaktu / Timing Diagram (opsional menggunakan TikZ atau gambar ilustrasi)
+\begin{figure}[htbp]
+	\centering
+	\begin{tikzpicture}[x=0.18mm, y=10mm, >=Stealth, font=\sffamily\small]
+		% Base axis / waktu
+		\draw[->, color=gray!60, thick] (0, 0) -- (600, 0) node[right, color=black] {\textit{Waktu}};
+		\draw[->, color=gray!60, thick] (0, 0) -- (0, 2.3) node[above, color=black] {Sinyal};
+
+		% Level logika
+		\node[left] at (0, 1.8) {\textbf{HIGH}};
+		\node[left] at (0, 0.4) {\textbf{LOW}};
+		\draw[dotted, color=gray!40] (0, 1.8) -- (580, 1.8);
+		\draw[dotted, color=gray!40] (0, 0.4) -- (580, 0.4);
+
+		% Bentuk gelombang sinyal ilustratif
+		\draw[ultra thick, color={rgb,255:red,30;green,64;blue,175}]
+		(0, 1.8) -- (50, 1.8) -- (50, 0.4) -- (180, 0.4) -- (180, 1.8) -- (240, 1.8)
+		-- (240, 0.4) -- (330, 0.4) -- (330, 1.8) -- (400, 1.8) -- (400, 0.4)
+		-- (450, 0.4) -- (450, 1.8) -- (550, 1.8);
+
+		% Anotasi rentang waktu
+		\draw[stealth-stealth, color={rgb,255:red,30;green,64;blue,175}] (50, 2.0) -- (180, 2.0) node[midway, above, font=\scriptsize] {Inisiasi / Trigger};
+		\draw[stealth-stealth, color={rgb,255:red,15;green,118;blue,110}] (240, 2.0) -- (330, 2.0) node[midway, above, font=\scriptsize] {Respons};
+		\draw[stealth-stealth, color={rgb,255:red,217;green,119;blue,6}] (400, 2.0) -- (550, 2.0) node[midway, above, font=\scriptsize] {Transmisi Data / Pulsa};
+	\end{tikzpicture}
+	\caption{Diagram pewaktu (\textit{timing diagram}) atau bentuk sinyal komponen Nama Komponen.}
+	\label{fig:nama_komponen_timing}
+\end{figure}
+
+Pada implementasi praktis mikrokontroler, protokol tingkat rendah ini umumnya dienkapsulasi
+melalui pustaka perangkat lunak (\textit{driver library}) yang menangani pewaktuan mikrodetik,
+pengalamatan register bus, serta kalkulasi integritas data secara otomatis sehingga pengguna
+cukup memanggil fungsi API tingkat tinggi.
 
 % ---------------------------------------------------------------------
 \subsubsection{Besaran yang Diukur atau Dikendalikan}
-Jelaskan besaran utama, satuan, rentang pengukuran atau kendali, resolusi,
-sensitivitas, akurasi, serta parameter lain yang relevan.
+Jelaskan besaran fisik utama yang menjadi domain kerja komponen (misal suhu, kelembapan,
+jarak, sudut mekanik, laju aliran, konsentrasi gas, dsb.):
 
 \begin{table}[H]
-\centering
-\caption{Karakteristik besaran komponen}
-\begin{tabularx}{\textwidth}{@{}lXX@{}}
-\toprule
-Parameter & Nilai & Keterangan \\
-\midrule
-Besaran utama & \dots & \dots \\
-Rentang & \dots & \dots \\
-Resolusi & \dots & \dots \\
-Akurasi/sensitivitas & \dots & \dots \\
-\bottomrule
-\end{tabularx}
+	\centering
+	\caption{Karakteristik besaran komponen Nama Komponen}
+	\label{tab:nama_komponen_karakteristik_besaran}
+	\small
+	\begin{tabularx}{\textwidth}{@{}lXX@{}}
+		\toprule
+		Parameter                            & Nilai                   & Keterangan                           \\
+		\midrule
+		Besaran utama                        & Besaran fisik utama     & Parameter operasional target         \\
+		Rentang kerja                        & Nilai min s.d. maks     & Rentang dinamis pengukuran / kendali \\
+		Resolusi                             & Nilai per satuan        & Resolusi bit atau sensitivitas diskret \\
+		Akurasi                              & Toleransi kesalahan     & Batas galat pengukuran/posisi        \\
+		Pengulangan (\textit{Repeatability}) & Nilai toleransi ulang   & Presisi pada kondisi berulang        \\
+		Stabilitas / Waktu respons           & Nilai durasi/stabilitas & Kecepatan tanggapan terhadap step input \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 % ---------------------------------------------------------------------
 \subsubsection{Karakteristik Sinyal}
-Identifikasi jenis sinyal dan jelaskan bentuk serta karakteristiknya. Bahas
-apakah sinyal bersifat analog, digital, PWM, UART, I\textsuperscript{2}C,
-SPI, atau protokol lain. Jelaskan level logika, rentang tegangan, frekuensi,
-kecepatan data, resolusi ADC/DAC, atau parameter lain yang diperlukan.
+Uraikan format sinyal elektrik antarmuka (analog tegangan/arus, pulsa PWM, atau paket serial digital):
+
+\begin{equation}
+	\text{Sinyal / Paket} = \text{Frame Header} + \text{Payload Data} + \text{Checksum}
+	\label{eq:nama_komponen_packet}
+\end{equation}
 
 \begin{table}[H]
-\centering
-\caption{Karakteristik sinyal}
-\begin{tabularx}{\textwidth}{@{}lXX@{}}
-\toprule
-Aspek & Nilai & Keterangan \\
-\midrule
-Jenis sinyal & \dots & \dots \\
-Level logika & \dots & \dots \\
-Rentang tegangan & \dots & \dots \\
-Frekuensi/baud rate & \dots & \dots \\
-\bottomrule
-\end{tabularx}
+	\centering
+	\caption{Karakteristik sinyal Nama Komponen}
+	\label{tab:nama_komponen_sinyal}
+	\small
+	\begin{tabularx}{\textwidth}{@{}lXX@{}}
+		\toprule
+		Aspek                       & Nilai                                    & Keterangan                                       \\
+		\midrule
+		Jenis sinyal                & Analog / Digital Serial / PWM / I$^2$C   & Format media transmisi sinyal                    \\
+		Level logika                & TTL 0--5\,V atau 3,3\,V LVCMOS           & Level tegangan high/low                          \\
+		Rentang tegangan operasional& 3,3--5,0\,V DC                           & Rentang toleransi tegangan sinyal                \\
+		Frekuensi / Kecepatan Data  & Nilai frekuensi / baud rate / sampling   & Laju pembaruan atau frekuensi clock sinyal       \\
+		Sinyal Inisiasi / Pemicu    & Durasi / kondisi inisiasi                & Perintah start dari MCU ke komponen              \\
+		Respons Komponen            & Durasi / pola handshake                  & Konfirmasi kesiapan dari komponen                \\
+		Format Data / Encoding      & Format bit 0/1 atau lebar pulsa          & Representasi data biner atau analog              \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 % ---------------------------------------------------------------------
 \subsubsection{Pin, Catu Daya, dan Antarmuka}
-Jelaskan fungsi setiap pin dan kebutuhan catu daya. Jika terdapat lebih dari
-satu mode antarmuka, jelaskan perbedaannya dan alasan pemilihannya.
+Jelaskan varian kemasan fisik komponen (misal: IC \textit{standalone} mentah vs modul \textit{breakout board}
+yang telah dilengkapi resistor pull-up, kapasitor filter, dan pin header).
 
 \begin{table}[H]
-\centering
-\caption{Pin dan antarmuka komponen}
-\begin{tabularx}{\textwidth}{@{}lXX@{}}
-\toprule
-Pin/Antarmuka & Fungsi & Keterangan \\
-\midrule
-VCC/VIN & Catu daya & \dots \\
-GND & Referensi & \dots \\
-OUT/SDA/SCL/dll. & Sinyal & \dots \\
-\bottomrule
-\end{tabularx}
+	\centering
+	\caption{Pemetaan pin dan antarmuka komponen Nama Komponen}
+	\label{tab:nama_komponen_pin}
+	\small
+	\begin{tabularx}{\textwidth}{@{}lllXX@{}}
+		\toprule
+		Pin (IC) & Pin (Modul Breakout) & Kabel   & Fungsi   & Keterangan                              \\
+		\midrule
+		Pin 1    & VCC / VIN            & Merah   & $V_{CC}$ & Catu daya positif (3,3\,V / 5\,V)       \\
+		Pin 2    & OUT / DATA / SDA     & Kuning  & Sinyal   & Jalur sinyal analog/digital bi-direksional \\
+		Pin 3    & SCL / TRIG / NC      & Putih   & Kontrol  & Pin clock / pemicu / \textit{Not Connected} \\
+		Pin 4    & GND                  & Hitam   & GND      & Referensi ground (0\,V)                 \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
+Jelaskan bila terdapat pin konfigurasi alamat (\textit{address select}), pin interupsi,
+atau resistor pull-up/down bawaan pada modul \textit{breakout}.
+
 \subsubsection{Kebutuhan Catu Daya}
-Jelaskan tegangan kerja, konsumsi arus, kondisi minimum/maksimum, kebutuhan
-regulator, decoupling, serta kompatibilitas level tegangan dengan
-mikrokontroler.
+Tegangan kerja optimal komponen berada pada rentang $3{,}3\text{--}5{,}0\,\text{V DC}$.
+Konsumsi arus berada pada kisaran nominal saat aktif dan mode siaga (\textit{standby/sleep}).
+Untuk menjaga kestabilan sinyal dan mencegah fluktuasi riak tegangan, disarankan memasang
+kapasitor \textit{decoupling} $100\,\text{nF}$ secara paralel sedekat mungkin antara pin $V_{CC}$ dan GND.
+Jika terdapat perbedaan level logika antara mikrokontroler (misal 5\,V) dengan komponen (3,3\,V),
+jelaskan apakah modul telah memiliki sirkuit \textit{logic level converter} terintegrasi atau
+memerlukan pembagi tegangan (\textit{voltage divider}) eksternal.
 
 % ---------------------------------------------------------------------
 \subsubsection{Spesifikasi Penting dari Datasheet}
-Ambil hanya parameter yang relevan terhadap pemakaian komponen. Jangan sekadar
-menyalin seluruh tabel datasheet; jelaskan arti setiap parameter dan mengapa
-parameter tersebut penting untuk eksperimen.
+Rangkum parameter-parameter penting yang diambil langsung dari datasheet pabrikan resmi:
 
 \begin{table}[H]
-\centering
-\caption{Spesifikasi penting komponen}
-\begin{tabular}{@{}lcc@{}}
-\toprule
-Parameter & Nilai & Satuan \\
-\midrule
-Tegangan kerja & \dots & \si{\volt} \\
-Rentang ukur/keluaran & \dots & \dots \\
-Resolusi/akurasi & \dots & \dots \\
-Waktu respons & \dots & \si{\milli\second} \\
-Arus konsumsi & \dots & \si{\milli\ampere} \\
-\bottomrule
-\end{tabular}
-\end{table}
-
-Sumber utama parameter: \cite{datasheet}.
-
-% ---------------------------------------------------------------------
-\subsubsection{Hubungan dengan Mikrokontroler}
-Jelaskan fitur mikrokontroler yang digunakan, misalnya GPIO, ADC, timer,
-interrupt, PWM, UART, I\textsuperscript{2}C, atau SPI. Kaitkan kebutuhan
-tersebut dengan karakteristik sinyal komponen dan konsep pada Bagian B.
-Referensi mikrokontroler dapat mengacu pada~\cite{mcu}.
-
-\begin{table}[H]
-\centering
-\caption{Pemetaan komponen ke mikrokontroler}
-\begin{tabularx}{\textwidth}{@{}lXX@{}}
-\toprule
-Kebutuhan komponen & Fitur MCU & Alasan pemilihan \\
-\midrule
-Input/output & \dots & \dots \\
-Antarmuka komunikasi & \dots & \dots \\
-Pemrosesan sinyal & \dots & \dots \\
-\bottomrule
-\end{tabularx}
+	\centering
+	\caption{Spesifikasi penting komponen Nama Komponen}
+	\label{tab:nama_komponen_spesifikasi}
+	\small
+	\begin{tabularx}{\textwidth}{@{}Xcc@{}}
+		\toprule
+		Parameter                                           & Nilai                   & Satuan        \\
+		\midrule
+		Tegangan kerja ($V_{DD}$ / $V_{CC}$)                & $3{,}3 \text{--} 5{,}0$ & $\text{V DC}$ \\
+		Arus konsumsi (Operasional Aktif)                   & $1{,}0 \text{--} 2{,}5$ & $\text{mA}$   \\
+		Arus konsumsi (\textit{Standby / Sleep})            & $10 \text{--} 50$       & $\mu\text{A}$ \\
+		Periode Pembaruan / Sampling Period                 & $1$                     & $\text{s}$    \\
+		Suhu operasional lingkungan                         & $-40 \text{--} +85$     & $^\circ\text{C}$ \\
+		Jarak Transmisi / Beban Maksimum                    & Hingga $20$             & $\text{m}$    \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
 % ---------------------------------------------------------------------
-\subsubsection{Rangkaian Antarmuka}
-Tampilkan skema koneksi komponen dengan mikrokontroler. Jelaskan aliran
-sinyal dan fungsi setiap komponen eksternal. Jika ada resistor, kapasitor,
-transistor, regulator, atau level shifter, sertakan dasar pemilihannya.
+\subsubsection{Koneksi dengan Mikrokontroler dan Implementasi Kode}
+Jelaskan bagaimana komponen dihubungkan ke mikrokontroler target (seperti Arduino Mega 2560/ATmega2560
+atau mikrokontroler lainnya). Sebutkan periferal internal mikrokontroler yang dialokasikan,
+seperti pin GPIO digital, kanal ADC analog, pin PWM timer, interupsi eksternal, atau bus komunikasi I$^2$C/SPI.
 
-\begin{figure}[H]
-\centering
-% Ganti dengan gambar rangkaian aktual, misalnya:
-% \includegraphics[width=0.85\textwidth]{images/rangkaian-nama-komponen.png}
-\fbox{\parbox[c][4cm][c]{0.85\textwidth}{\centering Tempatkan skema rangkaian di sini}}
-\caption{Rangkaian antarmuka Nama Komponen dengan mikrokontroler}
-\label{fig:rangkaian-komponen-nama}
+\paragraph{Rangkaian Skematik dan Simulasi}
+Pengujian antarmuka perangkat keras dapat divalidasi melalui simulator daring (seperti Wokwi)
+maupun perakitan breadboard secara fisik:
+\begin{itemize}
+	\item \textbf{Koneksi Catu Daya:} Pin VCC dihubungkan ke rel daya $5\,\text{V}$ atau $3{,}3\,\text{V}$ MCU, dan GND dihubungkan ke ground sistem bersama (\textit{common ground}).
+	\item \textbf{Koneksi Sinyal dan Komponen Pasif:} Pin sinyal dihubungkan ke pin I/O MCU yang sesuai. Jika menggunakan bus dengan saluran \textit{open-drain} (seperti 1-Wire atau I$^2$C), pasang resistor \textit{pull-up} eksternal bernilai $4{,}7\text{--}10\,\text{k}\Omega$ bila modul belum menyediakannya.
+\end{itemize}
+
+\begin{figure}[htbp]
+	\centering
+	% Ganti dengan file skematik rangkaian aktual atau tangkapan layar simulasi Wokwi
+	% \includegraphics[width=0.70\textwidth]{images/skema_nama_komponen.png}
+	\fbox{\parbox[c][5cm][c]{0.70\textwidth}{\centering Tempatkan tangkapan layar simulasi Wokwi atau diagram skematik di sini}}
+	\caption{Rangkaian antarmuka Nama Komponen dengan mikrokontroler pada simulasi / perakitan fisik.}
+	\label{fig:nama_komponen_schematic}
 \end{figure}
 
-\subsubsection{Perhitungan dan Justifikasi Rangkaian}
-Tunjukkan perhitungan yang diperlukan untuk menentukan nilai komponen
-pendukung atau mengubah besaran sinyal. Jelaskan asumsi yang digunakan dan
-bandingkan hasil perhitungan dengan batas datasheet.
-
-% ---------------------------------------------------------------------
-\subsubsection{Contoh Penggunaan Sederhana}
-Buat eksperimen kecil yang hanya bertujuan memahami komponen. Jelaskan
-input, prosedur, output yang diharapkan, dan indikator bahwa komponen bekerja
-sesuai prinsipnya. Eksperimen ini harus dapat berdiri sendiri sebelum masuk
-ke proyek utama.
-
-\subsubsection{Program atau Algoritma Dasar}
-Tampilkan bagian kode minimum yang diperlukan untuk membaca atau mengendalikan
-komponen. Jelaskan fungsi bagian penting kode, bukan hanya menampilkan kode.
-
-\begin{lstlisting}[caption={Contoh program dasar komponen}]
-// Tulis kode minimum untuk menguji komponen di sini.
-\end{lstlisting}
-
-% ---------------------------------------------------------------------
-\subsubsection{Hasil Eksplorasi}
-Dokumentasikan hasil pengamatan, nilai pembacaan, respons komponen, foto,
-grafik, atau bukti lain. Bedakan antara hasil yang diharapkan berdasarkan
-teori dan hasil aktual.
+Rincian pemetaan koneksi fisik antara pin komponen dan fungsi periferal mikrokontroler
+dirangkum pada Tabel~\ref{tab:nama_komponen_mcu_mapping}.
 
 \begin{table}[H]
-\centering
-\caption{Contoh format hasil eksplorasi}
-\begin{tabularx}{\textwidth}{@{}lXX@{}}
-\toprule
-Kondisi/Input & Hasil Teoretis & Hasil Pengamatan \\
-\midrule
-Kondisi 1 & \dots & \dots \\
-Kondisi 2 & \dots & \dots \\
-Kondisi 3 & \dots & \dots \\
-\bottomrule
-\end{tabularx}
+	\centering
+	\caption{Pemetaan antarmuka Nama Komponen ke mikrokontroler}
+	\label{tab:nama_komponen_mcu_mapping}
+	\small
+	\begin{tabularx}{\textwidth}{@{}lXX@{}}
+		\toprule
+		Kebutuhan Komponen                & Fitur MCU                      & Alasan Pemilihan \& Fungsi                                   \\
+		\midrule
+		Jalur Transmisi Sinyal            & Pin GPIO / ADC / Timer PWM     & Membaca logika sinyal atau menghasilkan modulasi pemicu      \\
+		Sinkronisasi Pewaktuan            & Hardware Timer / Delay System  & Menjaga presisi deteksi pulsa atau pewaktuan polling         \\
+		Pencegahan Kondisi Mengambang     & Resistor Pull-Up Internal/Eksternal & Memastikan level tegangan mantap saat jalur komunikasi idle \\
+		\bottomrule
+	\end{tabularx}
 \end{table}
 
-% ---------------------------------------------------------------------
-\subsubsection{Analisis dan Interpretasi}
-Hubungkan hasil eksplorasi dengan prinsip kerja dan spesifikasi datasheet.
-Jelaskan apakah hasil sesuai teori, penyebab perbedaan, serta implikasinya
-terhadap penggunaan komponen pada proyek.
+\paragraph{Kode Demo Pengujian}
+Berikut adalah contoh implementasi program minimal menggunakan pustaka resmi atau pembacaan
+register langsung untuk membaca/mengendalikan komponen dan melaporkan hasilnya melalui komunikasi serial:
 
-\subsubsection{Keterbatasan dan Sumber Kesalahan}
-Bahas noise, toleransi komponen, kesalahan pembacaan, kalibrasi, temperatur,
-kondisi lingkungan, keterbatasan library, keterbatasan catu daya, batas
-komunikasi, atau faktor lain yang dapat memengaruhi hasil.
+\begin{lstlisting}[language=C++, caption={Kode program pengujian Nama Komponen pada mikrokontroler}, label={lst:nama_komponen_code}]
+// Header pustaka pendukung komponen
+#define PIN_KOMPONEN 2 // Alokasi pin mikrokontroler
 
-\subsubsection{Kesimpulan Pemahaman Komponen}
-Tuliskan secara ringkas apa yang dapat disimpulkan mengenai prinsip kerja,
-karakteristik sinyal, kebutuhan mikrokontroler, dan kondisi penggunaan
-komponen. Tekankan bukti yang menunjukkan bahwa prinsip kerja telah dipahami.
+void setup() {
+  Serial.begin(9600);
+  Serial.println(F("Inisialisasi Pengujian Nama Komponen..."));
+
+  // Konfigurasi pin atau inisialisasi pustaka
+  pinMode(PIN_KOMPONEN, INPUT);
+}
+
+void loop() {
+  // Interval pembacaan sesuai sampling rate komponen
+  delay(1000);
+
+  // Proses akuisisi data atau kendali komponen
+  int nilaiSinyal = digitalRead(PIN_KOMPONEN);
+
+  // Menampilkan hasil pembacaan ke Serial Monitor
+  Serial.print(F("Status Komponen: "));
+  Serial.println(nilaiSinyal);
+}
+\end{lstlisting}
+
+\paragraph{Gambaran Hasil Pembacaan}
+Setelah kode diunggah ke mikrokontroler atau dijalankan melalui simulasi, keluaran pembacaan data
+pada \textit{Serial Monitor} akan tampak seperti pada contoh log berikut:
+
+\begin{verbatim}
+Inisialisasi Pengujian Nama Komponen...
+Status Komponen: Aktif / Terbaca (Nilai = 24.50)
+Status Komponen: Aktif / Terbaca (Nilai = 24.60)
+Status Komponen: Aktif / Terbaca (Nilai = 24.55)
+\end{verbatim}
